@@ -32,6 +32,10 @@ PUBLIC_URL = (
     or ""
 ).rstrip("/")
 
+# Deduplicate Telegram retries of the same update (slow Gemini/upload used to
+# delay the webhook 200, so Telegram POSTed again and we uploaded twice).
+_seen_update_ids: set[int] = set()
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(
@@ -86,10 +90,28 @@ async def health(_request: web.Request) -> web.Response:
 
 
 async def telegram_webhook(request: web.Request) -> web.Response:
+    """Ack Telegram immediately, then process. Slow handlers must not block the 200."""
     app: Application = request.app["bot_app"]
     data = await request.json()
     update = Update.de_json(data, app.bot)
-    await app.process_update(update)
+    if update is None:
+        return web.Response(text="ok")
+
+    uid = update.update_id
+    if uid in _seen_update_ids:
+        log.info("Ignoring duplicate update_id=%s", uid)
+        return web.Response(text="ok")
+    _seen_update_ids.add(uid)
+    if len(_seen_update_ids) > 500:
+        _seen_update_ids.clear()
+
+    async def _run() -> None:
+        try:
+            await app.process_update(update)
+        except Exception:
+            log.exception("process_update failed for update_id=%s", uid)
+
+    asyncio.create_task(_run())
     return web.Response(text="ok")
 
 
