@@ -42,7 +42,8 @@ In the Render service → **Environment**:
 | `TELEGRAM_BOT_TOKEN` | from BotFather |
 | `GEMINI_API_KEY` | Google AI Studio key |
 | `INTERVALS_API_KEY` | intervals.icu API key |
-| `INTERVALS_ATHLETE_ID` | e.g. `i800203` |
+| `INTERVALS_ATHLETE_ID` | your intervals.icu athlete id |
+| `RUNNER_NAME` | name shown in Telegram replies |
 | `PORT` | `8080` (already in render.yaml) |
 
 `RENDER_EXTERNAL_URL` is set by Render automatically — the bot uses it to register the Telegram webhook.
@@ -61,6 +62,7 @@ Save → wait for deploy (~2–3 min).
 export TELEGRAM_BOT_TOKEN=...
 export GEMINI_API_KEY=...
 export INTERVALS_API_KEY=...
-export INTERVALS_ATHLETE_ID=i800203
+export INTERVALS_ATHLETE_ID=your_athlete_id
+export RUNNER_NAME="Your Name"
 python3 bot_server.py   # polling mode when PUBLIC_URL unset
 ```

@@ -21,7 +21,8 @@ See **[docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md)**.
 export TELEGRAM_BOT_TOKEN=...
 export GEMINI_API_KEY=...
 export INTERVALS_API_KEY=...
-export INTERVALS_ATHLETE_ID=i800203
+export INTERVALS_ATHLETE_ID=your_athlete_id
+export RUNNER_NAME="Your Name"
 pip install -r requirements.txt
 python3 bot_server.py
 ```

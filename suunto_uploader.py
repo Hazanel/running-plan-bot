@@ -10,11 +10,11 @@ from PIL import Image
 # ==============================================================================
 # Configuration (secrets from env)
 # ==============================================================================
-INTERVALS_ATHLETE_ID = os.environ.get("INTERVALS_ATHLETE_ID", "i800203")
+INTERVALS_ATHLETE_ID = os.environ.get("INTERVALS_ATHLETE_ID", "")
 INTERVALS_API_KEY = os.environ.get("INTERVALS_API_KEY", "")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-RUNNER_NAME = os.environ.get("RUNNER_NAME", "Elad (אלעד)")
+RUNNER_NAME = os.environ.get("RUNNER_NAME", "runner")
 DEFAULT_IMAGE = "running_plan.jpg"
 YEAR = int(os.environ.get("PLAN_YEAR", "2026"))
 MODEL_NAME = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
