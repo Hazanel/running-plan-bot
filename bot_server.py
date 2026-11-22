@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 """
-Telegram bot + HTTP health endpoint for Render (same idea as jira-daily-report slash-server).
+Telegram bot + HTTP health endpoint for Render.
 
-Local:
-  export TELEGRAM_BOT_TOKEN=... GEMINI_API_KEY=... INTERVALS_API_KEY=...
-  python3 bot_server.py
-
-On Render (webhook — wakes on Telegram updates, like Slack slash commands):
-  RENDER_EXTERNAL_URL is set automatically; bot registers a webhook.
+Local (no PUBLIC_URL): long-polling getUpdates.
+Render (RENDER_EXTERNAL_URL set): webhook — Telegram POSTs to /telegram.
 """
 
 from __future__ import annotations

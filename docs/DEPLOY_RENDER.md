@@ -1,19 +1,12 @@
 # Deploy Running Plan Bot to Render.com
 
-Same pattern as [jira-daily-report](https://github.com/Hazanel/jira-daily-report): **GitHub repo + Render web service**.
-
-Telegram sends HTTP webhooks to Render (like Slack slash commands), so the free tier can sleep and wake on use.
+**GitHub** holds the code. **Render** runs a Docker web service that receives Telegram webhooks.
 
 ---
 
 ## Why Render (not GitHub Actions)?
 
-| | GitHub Actions | Render web service |
-|--|----------------|-------------------|
-| jira daily report | ✅ cron once/day | slash server always reachable |
-| this bot | ❌ can't listen for Telegram | ✅ webhook wakes on photo |
-
-GitHub stores the code; Render runs it.
+GitHub Actions is fine for a once-a-day cron job. This bot must answer when you send a photo, so it needs a reachable HTTP server. Render free web service sleeps when idle and wakes on the next request.
 
 ---
 
@@ -22,22 +15,16 @@ GitHub stores the code; Render runs it.
 1. Telegram → **@BotFather** → `/newbot`
 2. Copy the token
 
-## Step 2: Push this repo to GitHub
+## Step 2: Repo on GitHub
 
-```bash
-cd running-plan-bot
-git init
-git add .
-git commit -m "Initial running plan Telegram bot"
-gh repo create running-plan-bot --public --source=. --remote=origin --push
-```
+Already at `https://github.com/Hazanel/running-plan-bot` (push updates with `git push`).
 
 ## Step 3: Deploy on Render
 
 ### Option A: Blueprint (easiest)
 
 1. https://dashboard.render.com/select-repo  
-2. Select **`Hazanel/running-plan-bot`** (or your fork)  
+2. Select **`Hazanel/running-plan-bot`**  
 3. Render reads `render.yaml` → **Apply**
 
 ### Option B: Manual

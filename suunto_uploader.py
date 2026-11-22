@@ -8,7 +8,7 @@ import requests
 from PIL import Image
 
 # ==============================================================================
-# Configuration (secrets from env — same pattern as jira-daily-report)
+# Configuration (secrets from env)
 # ==============================================================================
 INTERVALS_ATHLETE_ID = os.environ.get("INTERVALS_ATHLETE_ID", "i800203")
 INTERVALS_API_KEY = os.environ.get("INTERVALS_API_KEY", "")

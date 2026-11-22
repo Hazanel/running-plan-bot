@@ -2,8 +2,6 @@
 
 WhatsApp plan photo → Telegram → Gemini parse → Intervals.icu / Suunto.
 
-Same hosting pattern as [jira-daily-report](https://github.com/Hazanel/jira-daily-report):
-
 - **GitHub** — source of truth  
 - **Render.com** — free web service (webhook + `/health`)  
 - **Secrets** — set in Render dashboard (never commit keys)
