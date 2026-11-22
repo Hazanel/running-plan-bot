@@ -44,6 +44,7 @@ In the Render service → **Environment**:
 | `INTERVALS_API_KEY` | intervals.icu API key |
 | `INTERVALS_ATHLETE_ID` | your intervals.icu athlete id |
 | `RUNNER_NAME` | name shown in Telegram replies |
+| `PLAN_YEAR` | optional — leave empty to use the current year |
 | `PORT` | `8080` (already in render.yaml) |
 
 `RENDER_EXTERNAL_URL` is set by Render automatically — the bot uses it to register the Telegram webhook.

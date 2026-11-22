@@ -4,6 +4,8 @@ import re
 import sys
 import json
 import base64
+from datetime import date
+
 import requests
 from PIL import Image
 
@@ -16,7 +18,8 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 RUNNER_NAME = os.environ.get("RUNNER_NAME", "runner")
 DEFAULT_IMAGE = "running_plan.jpg"
-YEAR = int(os.environ.get("PLAN_YEAR", "2026"))
+# PLAN_YEAR overrides; otherwise use the current calendar year.
+YEAR = int(os.environ.get("PLAN_YEAR") or date.today().year)
 MODEL_NAME = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 
 ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent"
